@@ -1,0 +1,18 @@
+{% extends "base.twig" %}
+
+{% block body %}
+    {#<pre>
+         {{ dump(chars) }}
+    </pre>#}
+    <h1>Test</h1>
+    <ul>
+    {% for char in chars %}
+        {% if char.nickname != userChar %}
+            <li>
+                <a href="?page=combat&frapper={{ char.id }}">{{ char.nickname  }}</a>:
+                <span>{{ char.hp }} hp</span>
+            </li>
+        {% endif %}
+    {% endfor %}
+    </ul>
+{% endblock %}

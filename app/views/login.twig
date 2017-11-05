@@ -1,0 +1,12 @@
+{% extends "base.twig" %}
+
+{% block body %}
+    <h1>Connexion</h1>
+    <form method="post" action="?page=create">
+        <div class="form-group">
+            <label for="nickname">Nickname</label>
+            <input type="text" name="nickname" class="form-control" id="nickname" placeholder="nickname">
+        </div>
+        <button type="submit" class="btn btn-primary">connexion</button>
+    </form>
+{% endblock %}
