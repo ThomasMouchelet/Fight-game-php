@@ -19,24 +19,31 @@ class LoginController extends  Controller
 
     public function createAction()
     {
-
         $manager = $this->getManager();
 
         $_SESSION['nickname'] = $_POST['nickname'];
 
-        $char = new Character(['nickname'=>$_POST['nickname']]);
-        $manager->addChar($char);
+        if(!$manager->isChar($_POST['nickname'])){
 
-        $chars = $manager->getCharacters();
-        $userChar = $_SESSION['nickname'];
+            $char = $this->createChar(['nickname'=>$_POST['nickname']]);
 
-        return $this->render('index.twig', ['chars'=>$chars,'userChar'=>$userChar]);
+            $manager->addChar($char);
+
+            $chars = $manager->getCharacters();
+
+            $userChar = $_SESSION['nickname'];
+
+            return $this->render('index.twig', ['chars'=>$chars,'userChar'=>$userChar]);
+        }else{
+            $message = 'Le pseudo que vous avez choisi existe déja';
+            session_destroy();
+            return $this->render('login.twig',['message'=>$message]);
+        }
+
     }
 
     public function disconect(){
-
         session_destroy();
-
         return $this->render('login.twig');
     }
 }

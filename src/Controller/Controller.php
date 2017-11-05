@@ -60,4 +60,11 @@ class Controller
         return $manager;
     }
 
+    public function createChar($data)
+    {
+        $char = new Character($data);
+
+        return $char;
+    }
+
 }
